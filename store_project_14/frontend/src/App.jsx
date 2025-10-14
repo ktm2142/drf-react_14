@@ -5,6 +5,9 @@ import { AuthContext } from "./contexts/AuthContext";
 import Registration from "./components/auth/Registration";
 import Login from "./components/auth/Login";
 import UserProfile from "./components/user/UserProfile";
+import CategoryList from "./components/shop/CategoryList";
+import CategoryDetail from "./components/shop/CategoryDetail";
+import ProductDetail from "./components/shop/ProductDetail";
 
 function App() {
   const { logout, user } = useContext(AuthContext);
@@ -49,10 +52,12 @@ function App() {
       )}
 
       <Routes>
-        <Route path="/" element={<></>} />
+        <Route path="/" element={<CategoryList />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<UserProfile />} />
+        <Route path="/category_detail/:id/" element={<CategoryDetail />} />
+        <Route path="/product/:id/" element={<ProductDetail />} />
       </Routes>
     </>
   );

@@ -4,6 +4,6 @@ from shop_app.views import CategoryListAPIView, CategoryDetailAPIView, ProductDe
 
 urlpatterns = [
     path('categories/', CategoryListAPIView.as_view(), name='categories'),
-    path('category_detail/<int:pk>/', CategoryDetailAPIView.as_view(), name='category_detail'),
+    path('category/<int:pk>/', CategoryDetailAPIView.as_view(), name='category_detail'),
     path('product/<int:pk>/', ProductDetailAPIView.as_view(), name='product'),
 ]

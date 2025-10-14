@@ -7,13 +7,13 @@ from .serializers import CategorySerializer, ProductRefSerializer, ProductDetail
 class CategoryListAPIView(generics.ListAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
+    pagination_class = None
 
 
-"""
- Getting list of products related to category,
- using ProductRefSerializer for less info in response,
- and without nesting
-"""
+
+# Getting list of products related to category.
+# Using ProductRefSerializer for less info in response,
+# and without nesting
 class CategoryDetailAPIView(generics.ListAPIView):
     serializer_class = ProductRefSerializer
 
@@ -25,7 +25,4 @@ class CategoryDetailAPIView(generics.ListAPIView):
 # Getting full info about product
 class ProductDetailAPIView(generics.RetrieveAPIView):
     serializer_class = ProductDetailSerializer
-
-    def get_object(self):
-        return Product.objects.all()
-
+    queryset = Product.objects.select_related('category')
