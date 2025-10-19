@@ -20,12 +20,11 @@ const CategoryDetail = () => {
     fetchProducts();
   }, []);
 
-  if (!products) return <p>Loading</p>;
 
   return (
     <>
       <ul>
-        {products.results.map((product) => (
+        {products?.results.map((product) => (
           <li key={product.id}>
             <Link to={`/product/${product.id}`}>
               <p>{product.name}</p>
@@ -34,12 +33,12 @@ const CategoryDetail = () => {
           </li>
         ))}
       </ul>
-      {products.previous && (
+      {products?.previous && (
         <button onClick={() => fetchProducts(products.previous)}>
           Previous
         </button>
       )}
-      {products.next && (
+      {products?.next && (
         <button onClick={() => fetchProducts(products.next)}>Next</button>
       )}
     </>

@@ -27,7 +27,7 @@ class CategoryDetailAPIView(generics.ListAPIView):
 # Search and filter in one endpoint
 class ProductSearchFilterAPIVIew(generics.ListAPIView):
     serializer_class = ProductRefSerializer
-    queryset = Product.objects.select_related('category').order_by('name')
+    queryset = Product.objects.all().order_by('name')
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ['category']
     search_fields = ['name', 'category__name', 'description']

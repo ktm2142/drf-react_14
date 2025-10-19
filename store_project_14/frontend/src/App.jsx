@@ -8,6 +8,7 @@ import UserProfile from "./components/user/UserProfile";
 import CategoryList from "./components/shop/CategoryList";
 import CategoryDetail from "./components/shop/CategoryDetail";
 import ProductDetail from "./components/shop/ProductDetail";
+import Filter from "./components/search_filter/Filter";
 
 function App() {
   const { logout, user } = useContext(AuthContext);
@@ -52,12 +53,18 @@ function App() {
       )}
 
       <Routes>
-        <Route path="/" element={<CategoryList />} />
+        <Route path="/" element={
+          <>
+            <CategoryList />
+            <Filter />
+          </>
+        } />
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/category_detail/:id/" element={<CategoryDetail />} />
         <Route path="/product/:id/" element={<ProductDetail />} />
+        <Route path="/filter" element={<Filter />} />
       </Routes>
     </>
   );
