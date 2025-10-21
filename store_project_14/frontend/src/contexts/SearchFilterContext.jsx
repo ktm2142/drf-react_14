@@ -6,17 +6,20 @@ export const SearchFilterContext = createContext();
 export const SearchFilterProvider = ({ children }) => {
   const [products, setProducts] = useState(null);
 
-  // Getting category ID or URL
+  // Filtering products by category
+  // Getting category ID or URL. Backend pagination give us URL we can use
   const performFiltration = async (categoryOrURL) => {
-
     let response;
     try {
+      // If a URL is passed (for pagination), we use it directly
       if (categoryOrURL.startsWith("http")) {
         response = await publicApiClient.get(categoryOrURL);
-      } else {
-        const params = new URLSearchParams();
-        params.append("category", categoryOrURL);
-        response = await publicApiClient.get("shop/search_filter/", { params });
+      }
+      // Otherwise, make a query with the category parameter
+      else {
+        response = await publicApiClient.get("shop/search_filter/", {
+          params: { category: categoryOrURL },
+        });
       }
       setProducts(response.data);
     } catch (error) {
@@ -24,14 +27,21 @@ export const SearchFilterProvider = ({ children }) => {
     }
   };
 
-  const performSearch = async (query) => {
+  // getting search query or URL. Backend pagination give us URL we can use
+  const performSearch = async (queryOrURL) => {
+    let response;
     try {
-      const params = new URLSearchParams();
-      params.append("query", query);
-      const response = await publicApiClient.get("shop/search_filter/", {
-        params,
-      });
-      setProducts(response.data.results);
+      // If a URL is passed (for pagination), we use it directly
+      if (queryOrURL.startsWith("http")) {
+        response = await publicApiClient.get(queryOrURL);
+      }
+      // Otherwise, make a query with the search parameter
+      else {
+        response = await publicApiClient.get("shop/search_filter/", {
+          params: { search: queryOrURL },
+        });
+      }
+      setProducts(response.data);
     } catch (error) {
       console.error("error in performSearch", error);
     }

@@ -74,6 +74,7 @@ const Filter = () => {
             </li>
           ))}
         </ul>
+        {/* pagination */}
         {products?.previous && (
           <button onClick={() => performFiltration(products.previous)}>Previous</button>
         )}

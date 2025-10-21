@@ -9,6 +9,7 @@ import CategoryList from "./components/shop/CategoryList";
 import CategoryDetail from "./components/shop/CategoryDetail";
 import ProductDetail from "./components/shop/ProductDetail";
 import Filter from "./components/search_filter/Filter";
+import Search from "./components/search_filter/Search";
 
 function App() {
   const { logout, user } = useContext(AuthContext);
@@ -57,6 +58,7 @@ function App() {
           <>
             <CategoryList />
             <Filter />
+            <Search />
           </>
         } />
         <Route path="/registration" element={<Registration />} />
@@ -65,6 +67,7 @@ function App() {
         <Route path="/category_detail/:id/" element={<CategoryDetail />} />
         <Route path="/product/:id/" element={<ProductDetail />} />
         <Route path="/filter" element={<Filter />} />
+        <Route path="/search" element={<Search />} />
       </Routes>
     </>
   );
