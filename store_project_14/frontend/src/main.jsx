@@ -5,12 +5,15 @@ import App from "./App.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { SearchFilterProvider } from "./contexts/SearchFilterContext.jsx";
+import { OrderProvider } from "./contexts/OrderContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <SearchFilterProvider>
       <AuthProvider>
-        <App />
+        <OrderProvider>
+          <App />
+        </OrderProvider>
       </AuthProvider>
     </SearchFilterProvider>
   </BrowserRouter>

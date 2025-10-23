@@ -1,5 +1,4 @@
 from rest_framework import generics
-from rest_framework.exceptions import NotFound
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from .models import Order, OrderItem
@@ -26,16 +25,15 @@ class OrderRetrieveAPIView(generics.RetrieveAPIView):
         )
 
 
-"""
-Submitting order is basically
-finding order belong to current user,
-and only changing status to pending
-"""
-
-
 class OrderSubmitAPIVIew(generics.UpdateAPIView):
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
+
+    """
+    Submitting order is basically
+    finding order belong to current user,
+    and only changing status to pending
+    """
 
     def get_object(self):
         return get_object_or_404(
@@ -48,10 +46,11 @@ class OrderSubmitAPIVIew(generics.UpdateAPIView):
         serializer.save(status='pending')
 
 
-# deleting order of current user
 class OrderDeleteAPIVIew(generics.DestroyAPIView):
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
+
+    # deleting order of current user
 
     def get_object(self):
         return get_object_or_404(
@@ -60,6 +59,15 @@ class OrderDeleteAPIVIew(generics.DestroyAPIView):
             status='draft'
         )
 
+
+class OrderHistoryAPIVIew(generics.ListAPIView):
+    serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Order.objects.filter(
+            user=self.request.user
+        ).exclude(status='draft')
 
 class OrderItemCreateAPIView(generics.CreateAPIView):
     serializer_class = OrderItemSerializer

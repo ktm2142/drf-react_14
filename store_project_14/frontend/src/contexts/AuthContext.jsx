@@ -40,6 +40,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem("refreshToken");
       setUser(null)
       setAuthenticated(false)
+      navigate("/")
     } catch (error) {
       console.error(error);
     }
