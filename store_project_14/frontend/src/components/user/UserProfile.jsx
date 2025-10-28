@@ -36,14 +36,20 @@ const UserProfile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateUserData({
-      fisrt_name: form.firstName,
+      first_name: form.firstName,
       last_name: form.lastName,
       phone_number: form.phoneNumber,
       city: form.city,
       address: form.address,
     });
-    setEdit(false)
+    setEdit(false);
   };
+
+  const toggleCancelButton = (
+    <button type="button" onClick={() => setEdit((prev) => !prev)}>
+        {edit ? "Cancel" : "Edit"}
+      </button>
+  )
 
   useEffect(() => {
     if (!authenticated) {
@@ -55,59 +61,65 @@ const UserProfile = () => {
 
   return (
     <>
-      <h1>Hello {user.username}!</h1>
+      <div className="form-card">
+        <h1 className="form-title">Hello {user.username}!</h1>
 
-      {edit ? (
-        <form onSubmit={handleSubmit}>
-          <input
-            name="firstName"
-            value={form.firstName}
-            onChange={handleChange}
-            placeholder="Your first name"
-          />
-          <br />
-          <input
-            name="lastName"
-            value={form.lastName}
-            onChange={handleChange}
-            placeholder="Your last name"
-          />
-          <br />
-          <input
-            name="phoneNumber"
-            value={form.phoneNumber}
-            onChange={handleChange}
-            placeholder="Your phone number"
-          />
-          <br />
-          <input
-            name="city"
-            value={form.city}
-            onChange={handleChange}
-            placeholder="City you live"
-          />
-          <br />
-          <input
-            name="address"
-            value={form.address}
-            onChange={handleChange}
-            placeholder="Your address"
-          />
-          <br />
-          <button type="submit">Save</button>
-        </form>
-      ) : (
-        <>
-          <p>Name: {user.first_name}</p>
-          <p>Last name: {user.last_name}</p>
-          <p>Phone number: {user.phone_number}</p>
-          <p>City: {user.city}</p>
-          <p>Address: {user.address}</p>
-        </>
-      )}
-      <button onClick={() => setEdit(prev => !prev)}>
-        {edit ? "Cancel" : "Edit"}
-      </button>
+        {edit ? (
+          <form onSubmit={handleSubmit} className="form-grid">
+            <input
+              name="firstName"
+              value={form.firstName}
+              onChange={handleChange}
+              placeholder="Your first name"
+            />
+            <br />
+            <input
+              name="lastName"
+              value={form.lastName}
+              onChange={handleChange}
+              placeholder="Your last name"
+            />
+            <br />
+            <input
+              name="phoneNumber"
+              value={form.phoneNumber}
+              onChange={handleChange}
+              placeholder="Your phone number"
+            />
+            <br />
+            <input
+              name="city"
+              value={form.city}
+              onChange={handleChange}
+              placeholder="City you live"
+            />
+            <br />
+            <input
+              name="address"
+              value={form.address}
+              onChange={handleChange}
+              placeholder="Your address"
+            />
+            <br />
+            <div className="form-actions">
+              <button type="submit">Save</button>
+              {toggleCancelButton}
+            </div>
+          </form>
+        ) : (
+          <>
+            <p>Name: {user.first_name}</p>
+            <p>Last name: {user.last_name}</p>
+            <p>Phone number: {user.phone_number}</p>
+            <p>City: {user.city}</p>
+            <p>Address: {user.address}</p>
+            <div className="form-actions">
+            {toggleCancelButton}
+            </div>
+          </>
+        )}
+      </div>
+      
     </>
   );
 };

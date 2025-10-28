@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { publicApiClient } from "../../api";
 import { Link } from "react-router-dom";
 
-
 const CategoryList = () => {
   const [categories, setCategories] = useState(null);
 
@@ -14,25 +13,26 @@ const CategoryList = () => {
       console.error("error in fetchCategories", error);
     }
   };
-  
+
   useEffect(() => {
-    fetchCategories()
-  }, [])
+    fetchCategories();
+  }, []);
 
   if (!categories) return <p>Loading</p>;
 
-
   return (
     <>
-      <ul>
+      <div className="category-grid">
         {categories.map((category) => (
-          <li key={category.id}>
-            <Link to={`/category_detail/${category.id}`}><p>{category.name}</p></Link>
-          </li>
+          <div key={category.id}  className="card">
+            <Link to={`/category_detail/${category.id}`}>
+              <p>{category.name}</p>
+            </Link>
+          </div>
         ))}
-      </ul>
+      </div>
     </>
   );
 };
 
-export default CategoryList
+export default CategoryList;

@@ -42,22 +42,24 @@ const Search = () => {
         />
         <button type="submit">Search</button>
       </form>
-      <ul>
+      <div className="category-grid">
         {products?.results.map((product) => (
-          <li key={product.id}>
-            <Link to={`/product/${product.id}`}>
-              <p>{product.name}</p>
-            </Link>
-            <p>{product.price}</p>
-          </li>
+          <Link key={product.id} to={`/product/${product.id}`} className="card">
+            <p>{product.name}</p>
+            <p className="price">{product.price}</p>
+          </Link>
         ))}
-      </ul>
-      {products?.previous && (
-        <button onClick={() => performSearch(products.previous)}>Prevoius</button>
-      )}
-      {products?.next && (
-        <button onClick={() => performSearch(products.next)}>Next</button>
-      )}
+      </div>
+      <div className="pagination">
+        {products?.previous && (
+          <button onClick={() => performSearch(products.previous)}>
+            Prevoius
+          </button>
+        )}
+        {products?.next && (
+          <button onClick={() => performSearch(products.next)}>Next</button>
+        )}
+      </div>
     </>
   );
 };

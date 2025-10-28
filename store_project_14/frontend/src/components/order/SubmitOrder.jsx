@@ -56,44 +56,49 @@ const SubmitOrder = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          name="firstName"
-          value={form.firstName}
-          onChange={handleChange}
-          placeholder="Your first name"
-        />
-        <br />
-        <input
-          name="lastName"
-          value={form.lastName}
-          onChange={handleChange}
-          placeholder="Your last name"
-        />
-        <br />
-        <input
-          name="phoneNumber"
-          value={form.phoneNumber}
-          onChange={handleChange}
-          placeholder="Your phone number"
-        />
-        <br />
-        <input
-          name="city"
-          value={form.city}
-          onChange={handleChange}
-          placeholder="City you live"
-        />
-        <br />
-        <input
-          name="address"
-          value={form.address}
-          onChange={handleChange}
-          placeholder="Your address"
-        />
-        <br />
-        <button type="submit">Save</button>
-      </form>
+      <div className="form-card">
+        <h1 className="form-title">Submit order</h1>
+        <form onSubmit={handleSubmit} className="form-grid">
+          <input
+            name="firstName"
+            value={form.firstName}
+            onChange={handleChange}
+            placeholder="Your first name"
+          />
+          <br />
+          <input
+            name="lastName"
+            value={form.lastName}
+            onChange={handleChange}
+            placeholder="Your last name"
+          />
+          <br />
+          <input
+            name="phoneNumber"
+            value={form.phoneNumber}
+            onChange={handleChange}
+            placeholder="Your phone number"
+          />
+          <br />
+          <input
+            name="city"
+            value={form.city}
+            onChange={handleChange}
+            placeholder="City you live"
+          />
+          <br />
+          <input
+            name="address"
+            value={form.address}
+            onChange={handleChange}
+            placeholder="Your address"
+          />
+          <br />
+          <div className="form-actions">
+            <button type="submit">Save</button>
+          </div>
+        </form>
+      </div>
     </>
   );
 };

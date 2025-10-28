@@ -67,7 +67,8 @@ class OrderHistoryAPIVIew(generics.ListAPIView):
     def get_queryset(self):
         return Order.objects.filter(
             user=self.request.user
-        ).exclude(status='draft')
+        ).prefetch_related('order_items__product').exclude(status='draft')
+
 
 class OrderItemCreateAPIView(generics.CreateAPIView):
     serializer_class = OrderItemSerializer

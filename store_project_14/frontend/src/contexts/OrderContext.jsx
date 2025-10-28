@@ -7,6 +7,7 @@ export const OrderContext = createContext();
 export const OrderProvider = ({ children }) => {
   const [orderData, setOrderData] = useState(null);
   const [orders, setOrders] = useState(null);
+  const [errMessage, setErrMessage] = useState("");
   const [message, setMessage] = useState("");
   // const navigate = useNavigate();
 
@@ -41,9 +42,10 @@ export const OrderProvider = ({ children }) => {
     }
   };
 
-  const fetchOrderHistory = async () => {
+  const fetchOrderHistory = async (url = null) => {
     try {
-      const response = await privateApiClient.get("order/history/");
+      const pageOrURL = url || "order/history/"
+      const response = await privateApiClient.get(pageOrURL);
       setOrders(response.data);
     } catch (error) {
       console.error("error in fetchOrderHistory", error);
@@ -56,10 +58,12 @@ export const OrderProvider = ({ children }) => {
         product_id: itemId,
         quantity,
       });
-      setMessage("Item added in cart!");
+      setMessage("Item added in cart")
+      setErrMessage("")
     } catch (error) {
       if (error.response.data) {
-        setMessage(error.response.data);
+        setMessage("")
+        setErrMessage(error.response.data);
       }
       console.error("error in addItemInCart", error);
     }
@@ -89,7 +93,10 @@ export const OrderProvider = ({ children }) => {
     <OrderContext.Provider
       value={{
         orderData,
+        errMessage,
+        setErrMessage,
         message,
+        setMessage,
         orders,
         fetchOrder,
         submitOrder,

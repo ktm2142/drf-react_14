@@ -16,35 +16,37 @@ const Login = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     login({
-        username: form.username,
-        password: form.password
-    })
-  }
+      username: form.username,
+      password: form.password,
+    });
+  };
 
   return (
-    <>  
-    <h1>Login</h1>
-        <form onSubmit={handleSubmit}>
-            <input
-            type="text"
-            name="username"
-            value={form.username}
-            onChange={handleChange}
-            placeholder="Username"            
-            />
-            <input
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            placeholder="Password"            
-            />
-            <button type="submit">login</button>
-        </form>
-    </>
-  )
+    <div className="form-card">
+      <h1 className="form-title">Login</h1>
+      <form onSubmit={handleSubmit} className="form-grid">
+        <input
+          type="text"
+          name="username"
+          value={form.username}
+          onChange={handleChange}
+          placeholder="Username"
+        />
+        <input
+          type="password"
+          name="password"
+          value={form.password}
+          onChange={handleChange}
+          placeholder="Password"
+        />
+        <div className="form-actions">
+          <button type="submit">Login</button>
+        </div>
+      </form>
+    </div>
+  );
 };
 
-export default Login
+export default Login;

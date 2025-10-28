@@ -26,64 +26,79 @@ function App() {
 
   return (
     <>
-      <h1>E-commerce DRF+React 14-th project</h1>
-      {!mainPage && <button onClick={() => navigate("/")}>To main page</button>}
+      <div className="toolbar">
+        <h1 className="app-title">E-commerce DRF+React 14-th project</h1>
+        
+        <div className="toolbar-actions">
+        {!mainPage && (
+          <button onClick={() => navigate("/")}>To main page</button>
+        )}
 
-      {!user ? (
-        <>
-          <button
-            onClick={() =>
-              registrationPage ? navigate("/") : navigate("/registration")
-            }
-          >
-            {registrationPage ? "Close" : "Registration"}
-          </button>
-          <button
-            onClick={() => (loginPage ? navigate("/") : navigate("login"))}
-          >
-            {loginPage ? "Close" : "Login"}
-          </button>
-        </>
-      ) : (
-        <>
-          <button
-            onClick={() =>
-              userProfilePage ? navigate("/") : navigate("/profile")
-            }
-          >
-            {userProfilePage ? "Close" : user.username}
-          </button>
-          <button
-            onClick={() => (cartPage ? navigate("/") : navigate("/cart"))}
-          >
-            {cartPage ? "Close" : "Cart"}
-          </button>
-          <button onClick={logout}>Logout</button>
-        </>
-      )}
+        {!user ? (
+          <>
+            <button
+              onClick={() =>
+                registrationPage ? navigate("/") : navigate("/registration")
+              }
+            >
+              {registrationPage ? "Close" : "Registration"}
+            </button>
+            <button
+              onClick={() => (loginPage ? navigate("/") : navigate("login"))}
+            >
+              {loginPage ? "Close" : "Login"}
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={() =>
+                userProfilePage ? navigate("/") : navigate("/profile")
+              }
+            >
+              {userProfilePage ? "Close" : user.username}
+            </button>
+            <button
+              onClick={() => (cartPage ? navigate("/") : navigate("/cart"))}
+            >
+              {cartPage ? "Close" : "Cart"}
+            </button>
+            <button onClick={logout}>Logout</button>
+          </>
+        )}
+        </div>
+      </div>
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <CategoryList />
-              <Filter />
-              <Search />
-            </>
-          }
-        />
-        <Route path="/registration" element={<Registration />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<UserProfile />} />
-        <Route path="/category_detail/:id/" element={<CategoryDetail />} />
-        <Route path="/product/:id/" element={<ProductDetail />} />
-        <Route path="/filter" element={<Filter />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/submit_order" element={<SubmitOrder />} />
-        <Route path="/order_history" element={<OrderHistory />} />
-      </Routes>
+      <div className="container">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <div className="controls-row">
+                  <div className="control">
+                    <Filter />
+                  </div>
+                <div className="control">
+                  <Search />
+                </div>
+                </div>
+                <CategoryList />
+              </>
+            }
+          />
+          <Route path="/registration" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/category_detail/:id/" element={<CategoryDetail />} />
+          <Route path="/product/:id/" element={<ProductDetail />} />
+          <Route path="/filter" element={<Filter />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/submit_order" element={<SubmitOrder />} />
+          <Route path="/order_history" element={<OrderHistory />} />
+        </Routes>
+      </div>
     </>
   );
 }

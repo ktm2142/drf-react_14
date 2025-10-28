@@ -43,37 +43,52 @@ const Cart = () => {
 
   return (
     <>
-      <h1>Your cart</h1>
+      <div className="cart-grid">
 
-      <button onClick={() => navigate("/order_history")}>Order history</button>
+        <button onClick={() => navigate("/order_history")}>
+          Order history
+        </button>
 
-      {!orderData?.order_items ? (
-        <p>No items in cart</p>
-      ) : (
-        <div>
-          <ul>
+        {!orderData?.order_items ? (
+          <p>No items in cart</p>
+        ) : (
+          <>
             {orderData?.order_items?.map((item) => (
-              <li key={item.id}>
+              <div key={item.id} className="card card-item">
                 <Link to={`/product/${item.product.id}`}>
                   <p>{item.product.name}</p>
                 </Link>
-                <p>{item.product.price}</p>
-                <p>
-                  {item.quantity} pcs. total price: {item.total_price}$
-                </p>
-                <button onClick={() => handleIncreaseQuantity(item)}>+</button>
-                <button onClick={() => handleDecreaseQuantity(item)}>-</button>
-                <button onClick={() => handleDeleteItem(item)}>x</button>
-              </li>
+                <div>
+                  <span>{item.product.price}$</span>
+                  <span>x{item.quantity}</span>
+                  <strong>= {item.total_price}</strong>
+                </div>
+                <div className="qty-controls">
+                  <button onClick={() => handleIncreaseQuantity(item)}>
+                    +
+                  </button>
+                  <span className="qty">{item.quantity}</span>
+                  <button onClick={() => handleDecreaseQuantity(item)}>
+                    -
+                  </button>
+                  <button onClick={() => handleDeleteItem(item)}>x</button>
+                </div>
+              </div>
             ))}
-          </ul>
-          <p>Total: {orderData.total}$</p>
-          <button onClick={() => navigate("/submit_order")}>
-            Complete order
-          </button>
-          <button onClick={handleDeleteOrder}>Delete order</button>
-        </div>
-      )}
+            <div className="cart-summary">
+              <p className="total">Total: {orderData.total}$</p>
+              <div className="cart-actions">
+                <button onClick={() => navigate("/submit_order")}>
+                  Complete order
+                </button>
+                <button onClick={handleDeleteOrder} className="danger">
+                  Delete order
+                </button>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
     </>
   );
 };

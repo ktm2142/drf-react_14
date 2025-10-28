@@ -24,32 +24,49 @@ const OrderHistory = () => {
   return (
     <>
       {orders?.results ? (
-        <ul>
-          {orders.results.map((order) => (
-            <li key={order.id}>
-              <hr />
+        <>
+          <div className="orders-grid">
+            {orders.results.map((order) => (
+              <div key={order.id} className="order-card">
+                <div className="order-header">
+                  <span className="order-id">Order ID: {order.id}</span>
+                  <span className="order-date">
+                    {formatDate(order.created_at)}
+                  </span>
+                </div>
+                <div className="order-meta">
+                  <span>Status: {order.status}</span>
+                  <span className="order-total">Total: {order.total}$</span>
+                </div>
 
-              <p>
-                Order {order.id} from {formatDate(order.created_at)}
-              </p>
-              <p>{order.status}</p>
-              <p>Items:</p>
-              <ul>
-                {order.order_items.map((item) => (
-                  <li key={item.id}>
-                    <p>{item.name}</p>
-                    <p>
-                      {item.price} pcs for {item.total_price}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-              <br />
-              <p>Total: {order.total}</p>
-              <hr />
-            </li>
-          ))}
-        </ul>
+                <ul className="order-items">
+                  {order.order_items.map((item) => (
+                    <li key={item.id} className="order-item">
+                      <span className="item-name">{item.product.name}</span>
+                      <span className="item-qty-price">
+                        {item.price}$ x {item.quantity} ={" "}
+                        <strong>{item.total_price}$</strong>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <p>Total: {order.total}$</p>
+              </div>
+            ))}
+          </div>
+          <div className="pagination">
+            {orders.previous && (
+              <button onClick={() => fetchOrderHistory(orders.previous)}>
+                Previous
+              </button>
+            )}
+            {orders.next && (
+              <button onClick={() => fetchOrderHistory(orders.next)}>
+                Next
+              </button>
+            )}
+          </div>
+        </>
       ) : (
         <p>You have no pending or completed orders yet</p>
       )}

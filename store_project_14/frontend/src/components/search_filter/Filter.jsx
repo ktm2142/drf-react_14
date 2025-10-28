@@ -66,21 +66,30 @@ const Filter = () => {
         <button onClick={applyFilter}>Apply filter</button>
       </div>
       <div>
-        <ul>
+        <div className="category-grid">
           {products?.results?.map((product) => (
-            <li key={product.id}>
-              <Link to={`/product/${product.id}`}><p>{product.name}</p></Link>
+            <Link
+              key={product.id}
+              to={`/product/${product.id}`}
+              className="card"
+            >
+              <p>{product.name}</p>
               <p>{product.price}</p>
-            </li>
+            </Link>
           ))}
-        </ul>
-        {/* pagination */}
-        {products?.previous && (
-          <button onClick={() => performFiltration(products.previous)}>Previous</button>
-        )}
-        {products?.next && (
-          <button onClick={() => performFiltration(products.next)}>Next</button>
-        )}
+        </div>
+        <div className="pagination">
+          {products?.previous && (
+            <button onClick={() => performFiltration(products.previous)}>
+              Previous
+            </button>
+          )}
+          {products?.next && (
+            <button onClick={() => performFiltration(products.next)}>
+              Next
+            </button>
+          )}
+        </div>
       </div>
     </>
   );
