@@ -26,9 +26,9 @@ const Registration = () => {
   };
 
   return (
-    <>
-    <h1>Registration</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="form-card">
+    <h1 className="form-title">Registration</h1>
+      <form onSubmit={handleSubmit} className="form-grid">
         <input
           type="text"
           name="username"
@@ -50,9 +50,11 @@ const Registration = () => {
           onChange={handleChange}
           placeholder="Confirm password"
         />
-        <button type="submit">register</button>
+        <div className="form-actions">
+        <button type="submit">Register</button>
+        </div>
       </form>
-    </>
+    </div>
   );
 };
 
