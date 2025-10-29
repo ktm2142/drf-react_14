@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'drf_react_14_db',
         'USER': 'postgres',
-        'PASSWORD': 'nopain5055',
+        'PASSWORD': '12345',
         'HOST':'172.19.102.169',
         'PORT': '5432'
     }
