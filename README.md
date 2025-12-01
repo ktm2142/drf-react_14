@@ -89,7 +89,6 @@ curl -X PATCH http://localhost:8000/api/v1/order/submit/ -H "Authorization: Bear
 **Prerequisites:**
 - Python 3.12+
 - PostgreSQL 14+
-- Node.js 20+ (optional for frontend)
 
 **Installation:**
 ```bash
